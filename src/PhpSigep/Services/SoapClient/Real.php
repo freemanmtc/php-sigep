@@ -48,6 +48,18 @@ class Real implements ServiceInterface
     }
 
     /**
+     * @param integer $idPlpMaster número da PLP
+     *
+     * @return Result<\PhpSigep\Model\solicitaXmlPlp[]>
+     */
+    public function solicitaXmlPlp($idPlpMaster)
+    {
+        $service = new ServiceImplementation\SolicitaXmlPlp();
+
+        return $service->execute($idPlpMaster);
+    }
+
+    /**
      * Pede para o WebService do Correios calcular o dígito verificador de uma etiqueta.
      * 
      * Se preferir você pode usar o método {@linnk \PhpSigep\Model\Etiqueta::getDv() } para calcular o dígito 
@@ -107,5 +119,17 @@ class Real implements ServiceInterface
     {
         $service = new ServiceImplementation\RastrearObjeto();
         return $service->execute($params);
+    }
+
+    /**
+     * @param $numeroCartaoPostagem
+     * @param $login
+     * @param $senha
+     * @return \PhpSigep\Services\Result<\PhpSigep\Model\verificarStatusCartaoPostagemResposta[]>
+     */
+    public function verificarStatusCartaoPostagem($numeroCartaoPostagem, $usuario, $senha)
+    {
+        $service = new ServiceImplementation\VerificarStatusCartaoPostagem();
+        return $service->execute($numeroCartaoPostagem, $usuario, $senha);
     }
 }
